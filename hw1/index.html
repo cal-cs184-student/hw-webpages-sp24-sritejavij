@@ -38,15 +38,18 @@
 <h2 align="middle">Section I: Rasterization</h2>
 
 <h3 align="middle">Part 1: Rasterizing single-color triangles</h3>
-
-<p>Here is an example 2x2 gridlike structure using an HTML table. Each <b>tr</b> is a row and each <b>td</b> is a column in that row. You might find this useful for framing and showing your result images in an organized fashion.</p>
-
+<p>In order to rasterize the triangles, I first found the bounding box by computing the minimum and maximum X and Y coordinates of the triangle based on its vertices. Then, I just iterate through the box and determine whether or not each point is inside the triangle using the cross-product formula (if the signs of all the cross-products are the same, the point is inside the triangle). It’s no worse than checking each sample within the bounding box since this is exactly what my algorithm does.</p>
+<div align="center">
+  <img src="task1.png" width="400px"/>
+  <figcaption>Default viewing parameters for test4, zoomed in on the edge of a triangle.</figcaption>
+</div>
+<!-- 
 <div align="middle">
   <table style="width=100%">
     <tr>
       <td>
         <img src="task1.png" align="middle" width="400px"/>
-        <figcaption align="middle">Caption goes here.</figcaption>
+        <figcaption align="middle">Default viewing parameters for test4, zoomed in on the edge of a triangle.</figcaption>
       </td>
       <td>
         <img src="images/image2.png" align="middle" width="400px"/>
@@ -65,13 +68,38 @@
       </td>
     </tr>
   </table>
-</div>
+</div> -->
 
 
 <h3 align="middle">Part 2: Antialiasing triangles</h3>
-
-
-
+<p>Supersampling is useful because it allows us to capture a significantly more detailed representation of the image by blowing it up and shrinking it back in.
+  To implement this, I first increase the rendered resolution with sample_rate. Since we divide each pixel into sqrt(sample_rate) segments, this is what the multiplication is with. 
+  Then, using the coordinates in the supersampled positions (superX, superY), I converted this back into the regular, non-supersampled coordinates (sampleX, sampleY) and centered this. 
+  This is noted by the variables (centerX, centerY). Then, we apply a similar approach to task 1 to determine whether or not the centered pixel coordinates are inside the triangle or not. 
+  If it is inside, the color is marked in the sample_buffer array. </p>
+  
+  <div align="middle">
+  <table style="width:100%">
+    <tr>
+      <td align="center" colspan="2">
+        <img src="task2\ -\ 1\ supersample.png" width="400px"/>
+        <figcaption>Supersampling rate of 1.</figcaption>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="task2\ -\ 16\ supersample.png" width="400px"/>
+        <figcaption>Supersampling rate of 16.</figcaption>
+      </td>
+      <td align="center">
+        <img src="task2\ -\ 4\ supersample.png" width="400px"/>
+        <figcaption>Supersampling rate of 4.</figcaption>
+      </td>
+    </tr>
+  </table>
+</div>
+  
+  
 <h3 align="middle">Part 3: Transforms</h3>
 
 
