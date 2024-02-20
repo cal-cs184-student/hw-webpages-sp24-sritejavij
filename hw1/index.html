@@ -98,20 +98,44 @@
     </tr>
   </table>
 </div>
+  <p>The results are more dramatic near a skinny corner because the pixel coverage in these areas are inherently small, and increasing the resolution here leads to the largest disparity from the initial sample.</p>
   
   
 <h3 align="middle">Part 3: Transforms</h3>
-
-
+<p>Here, I implemented basic matrix transforms, such as translate and rotate. I altered the svg file of the robot to make it look like it is waving.</p>
+  
+<div align="center">
+  <img src="task3.png" width="400px"/>
+  <figcaption>Robot waving after transforming the limbs.</figcaption>
+</div>
 
 <h2 align="middle">Section II: Sampling</h2>
 
 <h3 align="middle">Part 4: Barycentric coordinates</h3>
+  <p>Barycentric coordinates are a coordinate system in which each point is a linear combination of the vertices on a triangle. In other words, it’s a way of relating each point inside the triangle to each of the vertices in some scalable, understandable way. This is especially helpful with color gradients because we have a smooth way of interpolating the interior of a shape based on their relative position to each of the vertices’ colors. The cut-up circle shows how it’s still able to smoothly interpolate the color across sharp corners.
+</p>
 
+  <div align="center">
+  <table style="width:100%">
+    <tr>
+      <td align="center">
+        <img src="task4.png" width="400px"/>
+        <figcaption>A sample rate of 1 with default viewing parameters.</figcaption>
+      </td>
+      <td align="center">
+        <img src="task4\ copy.png" width="400px"/>
+        <figcaption>A chopped-up circle into triangle pieces showing smooth color interpolation in sharp areas.</figcaption>
+      </td>
+    </tr>
+  </table>
+</div>
 
 <h3 align="middle">Part 5: "Pixel sampling" for texture mapping</h3>
+Pixel sampling is a method by which we can attach textures to our graphics. It samples pixels from the texture and finds how to map it to our surface. Nearest neighbor sampling is a method in which we select the nearest texel color on the texture relative to where we are on the surface. There’s no interpolation. Bilinear sampling, on the other hand, is a bit more involved. It takes the four closest texels and and interpolates the colors across the four of these to arrive at the color displayed on the surface. This allows for a much smoother surface in terms of its color interpolation. There will be a larger difference when there are finer details in the texture, where nearest_neighbor will end up slightly blurrier or less exact as billinear. 
 
+  
 
+  
 <h3 align="middle">Part 6: "Level sampling" with mipmaps for texture mapping</h3>
 
 
