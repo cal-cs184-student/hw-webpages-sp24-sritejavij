@@ -131,7 +131,7 @@
 </div>
 
 <h3 align="middle">Part 5: "Pixel sampling" for texture mapping</h3>
-<p>Pixel sampling is a method by which we can attach textures to our graphics. It samples pixels from the texture and finds how to map it to our surface. Nearest neighbor sampling is a method in which we select the nearest texel color on the texture relative to where we are on the surface. There’s no interpolation. Bilinear sampling, on the other hand, is a bit more involved. It takes the four closest texels and and interpolates the colors across the four of these to arrive at the color displayed on the surface. This allows for a much smoother surface in terms of color interpolation. There will be a larger difference when there are finer details in the texture, where nearest neighbor will end up slightly more blocky than bilinear (giving bilinear the appearance of blurriness). </p>
+<p>Pixel sampling is a method by which we can attach textures to our graphics. It samples pixels from the texture and finds how to map it to our surface. Nearest neighbor sampling is a method in which we select the nearest texel color on the texture relative to where we are on the surface. There’s no interpolation. Bilinear sampling, on the other hand, is a bit more involved. It takes the four closest texels and and interpolates the colors across the four of these to arrive at the color displayed on the surface. This allows for a much smoother surface in terms of color interpolation. </p>
 <p>Below is an example of bilinear clearly being a better choice than nearest neighbor, where pixels are more smoothly integrated and meshed together.</p>
 
 
@@ -178,7 +178,7 @@
     </tr>
   </table>
 </div>
-
+<p>There will be a large difference when there are finer details in the texture, where nearest neighbor will end up slightly more blocky than bilinear (giving bilinear the appearance of blurriness).</p>
   
 <h3 align="middle">Part 6: "Level sampling" with mipmaps for texture mapping</h3>
 <p>Mipmaps are sequences of images in which the next image is a lower resolution than the previous. Level sampling is the process of choosing the level that most closely matches the pixel on the screen, and this helps to reduce aliasing. In my code, I first find the appropriate level with the get_level function, computing the derivatives of the UV coordinates to see the rate of change of the texture over a triangle in the screen. Then, in the sample function, I sample the correct color from the texture’s mipmaps based on either nearest or bilinear interpolation. To rasterize, I just used a similar process to task 5 and found the barycentric coordinates of each pixel and interpolated the UV coordinates based on sample and get_level computation.</p>
