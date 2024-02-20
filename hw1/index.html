@@ -183,6 +183,31 @@
 <h3 align="middle">Part 6: "Level sampling" with mipmaps for texture mapping</h3>
 <p>Mipmaps are sequences of images in which the next image is a lower resolution than the previous. Level sampling is the process of choosing the level that most closely matches the pixel on the screen, and this helps to reduce aliasing. In my code, I first find the appropriate level with the get_level function, computing the derivatives of the UV coordinates to see the rate of change of the texture over a triangle in the screen. Then, in the sample function, I sample the correct color from the texture’s mipmaps based on either nearest or bilinear interpolation. To rasterize, I just used a similar process to task 5 and found the barycentric coordinates of each pixel and interpolated the UV coordinates based on sample and get_level computation.</p>
 
+  <div align="middle">
+  <table style="width=100%">
+    <tr>
+      <td>
+        <img src="l0pnearest.png" align="middle" width="600px"/>
+        <figcaption align="middle">L_ZERO with P_NEAREST.</figcaption>
+      </td>
+      <td>
+        <img src="l0plinear.png" align="middle" width="600px"/>
+        <figcaption align="middle">L_ZERO with P_LINEAR.</figcaption>
+      </td>
+    </tr>
+    <br>
+    <tr>
+      <td>
+        <img src="lnearestpnearest.png" align="middle" width="600px"/>
+        <figcaption align="middle">L_NEAREST with P_NEAREST.</figcaption>
+      </td>
+      <td>
+        <img src="lnearestplinear.png" align="middle" width="600px"/>
+        <figcaption align="middle">L_NEAREST with P_LINEAR.</figcaption>
+      </td>
+    </tr>
+  </table>
+</div>
 
 <h2 align="middle">Section III: Art Competition</h2>
 <p>If you are not participating in the optional art competition, don't worry about this section!</p>
