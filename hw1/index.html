@@ -131,7 +131,7 @@
 </div>
 
 <h3 align="middle">Part 5: "Pixel sampling" for texture mapping</h3>
-<p>Pixel sampling is a method by which we can attach textures to our graphics. It samples pixels from the texture and finds how to map it to our surface. Nearest neighbor sampling is a method in which we select the nearest texel color on the texture relative to where we are on the surface. There’s no interpolation. Bilinear sampling, on the other hand, is a bit more involved. It takes the four closest texels and and interpolates the colors across the four of these to arrive at the color displayed on the surface. This allows for a much smoother surface in terms of its color interpolation. There will be a larger difference when there are finer details in the texture, where nearest_neighbor will end up slightly blurrier or less exact as billinear. </p>
+<p>Pixel sampling is a method by which we can attach textures to our graphics. It samples pixels from the texture and finds how to map it to our surface. Nearest neighbor sampling is a method in which we select the nearest texel color on the texture relative to where we are on the surface. There’s no interpolation. Bilinear sampling, on the other hand, is a bit more involved. It takes the four closest texels and and interpolates the colors across the four of these to arrive at the color displayed on the surface. This allows for a much smoother surface in terms of color interpolation. There will be a larger difference when there are finer details in the texture, where nearest neighbor will end up slightly more blocky than bilinear (giving bilinear the appearance of blurriness). </p>
 <p>Below is an example of bilinear clearly being a better choice than nearest neighbor, where pixels are more smoothly integrated and meshed together.</p>
 
 
@@ -157,23 +157,23 @@
   <table style="width=100%">
     <tr>
       <td>
-        <img src="task1.png" align="middle" width="400px"/>
-        <figcaption align="middle">Default viewing parameters for test4, zoomed in on the edge of a triangle.</figcaption>
+        <img src="task5bilinear1" align="middle" width="400px"/>
+        <figcaption align="middle">Bilinear with sample rate of 1.</figcaption>
       </td>
       <td>
-        <img src="images/image2.png" align="middle" width="400px"/>
-        <figcaption align="middle">Caption goes here.</figcaption>
+        <img src="task5nearest1" align="middle" width="400px"/>
+        <figcaption align="middle">Nearest neighbor with sample rate of 1.</figcaption>
       </td>
     </tr>
     <br>
     <tr>
       <td>
-        <img src="images/image3.png" align="middle" width="400px"/>
-        <figcaption align="middle">Caption goes here.</figcaption>
+        <img src="task5nearest16" align="middle" width="400px"/>
+        <figcaption align="middle">Nearest neighbor with sample rate of 16.</figcaption>
       </td>
       <td>
-        <img src="images/image4.png" align="middle" width="400px"/>
-        <figcaption align="middle">Caption goes here.</figcaption>
+        <img src="task5bilinear16" align="middle" width="400px"/>
+        <figcaption align="middle">Bilinear with sample rate of 16.</figcaption>
       </td>
     </tr>
   </table>
