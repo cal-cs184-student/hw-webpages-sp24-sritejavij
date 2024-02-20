@@ -157,22 +157,22 @@
   <table style="width=100%">
     <tr>
       <td>
-        <img src="task5bilinear1" align="middle" width="400px"/>
+        <img src="task5bilinear1.png" align="middle" width="600px"/>
         <figcaption align="middle">Bilinear with sample rate of 1.</figcaption>
       </td>
       <td>
-        <img src="task5nearest1" align="middle" width="400px"/>
+        <img src="task5nearest1.png" align="middle" width="600px"/>
         <figcaption align="middle">Nearest neighbor with sample rate of 1.</figcaption>
       </td>
     </tr>
     <br>
     <tr>
       <td>
-        <img src="task5nearest16" align="middle" width="400px"/>
+        <img src="task5nearest16.png" align="middle" width="600px"/>
         <figcaption align="middle">Nearest neighbor with sample rate of 16.</figcaption>
       </td>
       <td>
-        <img src="task5bilinear16" align="middle" width="400px"/>
+        <img src="task5bilinear16.png" align="middle" width="600px"/>
         <figcaption align="middle">Bilinear with sample rate of 16.</figcaption>
       </td>
     </tr>
@@ -181,7 +181,7 @@
 
   
 <h3 align="middle">Part 6: "Level sampling" with mipmaps for texture mapping</h3>
-
+<p>Mipmaps are sequences of images in which the next image is a lower resolution than the previous. Level sampling is the process of choosing the level that most closely matches the pixel on the screen, and this helps to reduce aliasing. In my code, I first find the appropriate level with the get_level function, computing the derivatives of the UV coordinates to see the rate of change of the texture over a triangle in the screen. Then, in the sample function, I sample the correct color from the texture’s mipmaps based on either nearest or bilinear interpolation. To rasterize, I just used a similar process to task 5 and found the barycentric coordinates of each pixel and interpolated the UV coordinates based on sample and get_level computation.</p>
 
 
 <h2 align="middle">Section III: Art Competition</h2>
