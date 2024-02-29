@@ -39,36 +39,43 @@
 
 <h3 align="middle">Part 1: Bezier Curves with 1D de Casteljau Subdivision</h3>
 	<p>de Casteljau’s algorithm is a recursive algorithm that we use to get the points that lie on a Bezier curve. It’s based on linear interpolation and works by essentially finding set of intermediate points from a set of control points thats one dimension less until it reaches a single point that lies on the curve. A new point is found with the parameter t that defines where it relatively lies on the final curve.</p>
-<div align="center">
-  <img src="" width="400px"/>
-  <figcaption></figcaption>
-</div>
-<!-- 
+<p>Below are images of the algorithm process as well as a comparison with the correct curve.</p>
+	
 <div align="middle">
   <table style="width=100%">
     <tr>
       <td>
-        <img src="task1.png" align="middle" width="400px"/>
-        <figcaption align="middle">Default viewing parameters for test4, zoomed in on the edge of a triangle.</figcaption>
+        <img src="task11.png" align="middle" width="400px"/>
+        <figcaption align="middle"></figcaption>
       </td>
       <td>
-        <img src="images/image2.png" align="middle" width="400px"/>
-        <figcaption align="middle">Caption goes here.</figcaption>
+        <img src="task12.png" align="middle" width="400px"/>
+        <figcaption align="middle">.</figcaption>
       </td>
     </tr>
     <br>
     <tr>
       <td>
-        <img src="images/image3.png" align="middle" width="400px"/>
-        <figcaption align="middle">Caption goes here.</figcaption>
+        <img src="task13.png" align="middle" width="400px"/>
+        <figcaption align="middle"></figcaption>
       </td>
       <td>
-        <img src="images/image4.png" align="middle" width="400px"/>
-        <figcaption align="middle">Caption goes here.</figcaption>
+        <img src="task14.png" align="middle" width="400px"/>
+        <figcaption align="middle"></figcaption>
       </td>
     </tr>
   </table>
-</div> -->
+</div>
+
+<div align="center">
+  <img src="task1withcurve.png" width="400px"/>
+  <figcaption>The completed curve with my interpolation.</figcaption>
+</div>
+
+<div align="center">
+  <img src="task1diffcurve.png" width="400px"/>
+  <figcaption>A different curve interpolated.</figcaption>
+</div>
 
 
 <h3 align="middle">Part 2: Bezier Surfaces with Separable 1D de Casteljau</h3>
