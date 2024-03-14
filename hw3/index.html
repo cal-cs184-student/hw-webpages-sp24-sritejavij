@@ -73,74 +73,48 @@
 
 
 
-<h2 align="middle">Section II: Triangle Meshes and Half-Edge Data Structure</h2>
+<h2 align="middle">Section II: Bounding Volume Hierarchy</h2>
 
-<h3 align="middle">Part 3: Area-Weighted Vertex Normals</h3>
-  <p>To implement the area-weighted vertex normals, I traversed the faces about a vertex similar to how it is described in the halfEdgeMesh.h. Then, I found the area-weighted face normals for each face by just using the basic cross-product definition and summed and normalized them.</p>
+<h3 align="middle">BVH Consutrction</h3>
+  <p>
+	  For constructing the BVH tree, I went with a recursive approach, first checking the standard base case of whether or not we are at a leaf node. For the heuristic, along each axis, I computed the value of the left box’s surface area multiplied by the number of primitives on the left and added that with the value of the right box’s surface area multiplied by the number of primitives on the right side. Whichever was minimal was the axis I chose. I split into left and right boxes based on the average centroid position. I then recursed down the left and right subtrees based on the split from the heuristic. An interesting issue I ran into was pointer problems when performing the recursive call. The pointers to the vectors storing the primitives would get lost in the stack, causing my code to error. I asked ChatGPT how to fix this, and it recommended some C++ specific in-line function that addressed the problem without altering any dependencies. This was the partition function.
+	  
+  </p>
 
-  <div align="center">
-  <table style="width:100%">
-    <tr>
-      <td align="center">
-        <img src="task3noq.png" width="400px"/>
-        <figcaption>Teapot shading without vertex normals.</figcaption>
-      </td>
-      <td align="center">
-        <img src="task3q.png" width="400px"/>
-        <figcaption>Teapot shading with vertex normals.</figcaption>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<h3 align="middle">Part 4: Edge Flip</h3>
-<p> To implement edge flips, I first drew out the triangle diagram given in the spec. Then, by following the vertices and edges of each, I mapped each to the corresponding position, and then just hard-coded out each of the new positions. Debugging was pretty nitpicky, since small changes to outer twin edges, or twin->next()’s, etc. all impacted the entire code, so each line had to be both purposeful and in order since subsequent lines depended on the previous ones. </p>
-
-  <div align="center">
-  <table style="width:100%">
-    <tr>
-      <td align="center">
-        <img src="task4.png" width="400px"/>
-        <figcaption>The teapot after a few edge flips.</figcaption>
-      </td>
-      <td align="center">
-        <img src="task4-2.png" width="400px"/>
-        <figcaption>The teapot after a few other edge flips.</figcaption>
-      </td>
-    </tr>
-  </table>
-</div>
-  
-<h3 align="middle">Part 5: Edge Split</h3>
-<p>In order to implement edge splitting, I first drew out the basic triangle, labeling all the halfedges, edges, vertices, twins, and more that I needed to keep track of. I converted the initial BC edge into one of the 4 total new edges that were in the end result. I followed the spec and just created a new middle vertex in the center and updated all the variables I stored around it based on what the new neighbors were. An interesting debugging trick I used was to first just write down and code up every single edge, vertex, twin, halfedge, face, and everything into their own variables. Then, after reassigning everything, I deleted what ended up not being necessary until I was left with what worked. This helped a lot since instead of trying to figure out what I was missing, I was able to systematically eliminate unnecessary updates until I was left with a working result.</p>
   <div align="middle">
   <table style="width=100%">
     <tr>
       <td>
-        <img src="task51.png" align="middle" width="600px"/>
-        <figcaption align="middle">The teapot after some edge splits.</figcaption>
+        <img src="task21.png" align="middle" width="600px"/>
+        <figcaption align="middle">Max Planck</figcaption>
       </td>
       <td>
-        <img src="task52.png" align="middle" width="600px"/>
-        <figcaption align="middle">The teapot after some edge splits.</figcaption>
+        <img src="task22.png" align="middle" width="600px"/>
+        <figcaption align="middle">Beast</figcaption>
       </td>
     </tr>
     <br>
     <tr>
       <td>
-        <img src="task53.png" align="middle" width="600px"/>
-        <figcaption align="middle">The teapot after a combination of edge splits and flips.</figcaption>
+        <img src="task23.png" align="middle" width="600px"/>
+        <figcaption align="middle">Car</figcaption>
       </td>
       <td>
-        <img src="task54.png" align="middle" width="600px"/>
-        <figcaption align="middle">The teapot after a combination of edge splits and flips.</figcaption>
+        <img src="task24.png" align="middle" width="600px"/>
+        <figcaption align="middle">Building</figcaption>
       </td>
     </tr>
   </table>
 </div>
 
 
-<h3 align="middle">Part 6: Loop Subdivision for Mesh Upsampling</h3>
+<p>The rendering times of images such as Max Planck, the beast, and beetle, on average, took about 1.2 seconds. On the other hand, without BVH acceleration, the max planck image alone took nearly 2 minutes on my local machine. The building.dae file is another example, rendering almost instantly while taking minutes to render without the acceleration algorithm.
+</p>
+
+
+
+
+<h2 align="middle">Section III: Direct Illumination</h2>
 	<p>I implemented the Loop subdivison algorithm by first finding the positions of the new and old vertices, iterating around every vertex and each halfedge about each of those vertices. I then applied the formula for the updated position for the old vertex according to the spec. For the edges, I followed a similar approach by iterating over every edge of the mesh and finding the appropriate values to update. I then did the standard flipEdge and splitEdge over the proper edges. In this case, split every edge and flip an edge connecting an old and new vertex. An interesting debugging trick I used was to implement each step of the algorithm individually, and see the effect of it on the mesh. For instance, I first applied the splitEdge, then flipEdge, and then combined them to not only learn about the effects of each on the entire mesh, but also to make sure the implementation was correct. Sharp edges tend to smooth out, and cubes become much more spherical. Pre-splitting edges would probably lower the effect since they aren’t explicitly accounted for on each run. It doesn’t consider sharpness unless specifically done.</p>
 <p>Below are images of Loop subdivision steps performed on both the cube and the torus.</p>
 
