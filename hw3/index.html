@@ -163,6 +163,26 @@
 	<p>In each of the images where we subsequently increase the number of light rays we render with, we also see how much more detailed the image becomes and how much less noise is being created while still maintaining the overall lighting effects even in the noisest, 1 light ray image. By the time we use the -l 64 flag, the picture is super clear with virtually no visible noise.</p>
 
 <h2 align="middle">Section IV: Global Illumination</h2>
+	<p>Indirect lighting, in short, is the way by which we illuminate objects with light that has already bounced off other surfaces. This can lead to color bleeding, which is a process by which the colors from some objects “leaks” into the lighting of other objects, and we see traces of that color in the other object. My code works by first calculating the hit point where the light ray intersects and finding the intersection distance as well as the outgoing ray. I first set L_out to the direct lighting output before updating to account for global illumination. To account for the possible no accumulation flag, we have a first conditional check to see whether or not we are at the maximum allowed depth or if the flag is true. Now, for actually adding the indirect lighting, I sample the BSDF as well as a pdf for the direction of the incoming direction of the bsdf. If it is significant (i.e. the probability isn’t 0 to avoid division by 0 and the bsdf has a nonzero magnitude) then I cast a new ray into the scene from the intersection point into the sampled direction. Then, with Russian roulette illumination, I check the conditions of whether or not we are at the maximum depth or if we terminate according to the coin_flip probability, and continue recursively calling the function to account for every next bounce. Now, L_out will contain the accumulated radiance from both direct and indirect lighting of a scene.
+</p>
+	
+<div align="center">
+  <table style="width:100%">
+    <tr>
+      <td align="center">
+        <img src="task4direct.png" width="400px"/>
+        <figcaption>Direct lighting</figcaption>
+      </td>
+      <td align="center">
+        <img src="task4indirect.png" width="400px"/>
+        <figcaption>Indirect lighting</figcaption>
+      </td>
+    </tr>
+  </table>
+</div>
+
+	
+	
 
 </body>
 </html>
