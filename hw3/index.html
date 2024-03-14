@@ -35,31 +35,32 @@
 <h2 align="middle">Overview</h2>
 <p>In this homework, I implemented various techniques for illuminating surfaces and objects for realistic lighting. Some methods include ray tracing, hemisphere sampling, and more. Note: AI tools were used to gain a deeper understanding of the underlying principles behind the concepts and how to approach implementation for a few tasks.</p>
 
-<h2 align="middle">Section I: Ray Generation and Scene Intersection /h2>
+<h2 align="middle">Section I: Ray Generation and Scene Intersection </h2>
 
 <h3 align="middle">Ray Generation</h3>
-	<p>For ray generation, I applied basic Monte Carlo integration over ns_aa randomly sampled rays passing through the neighborhood of the pixel. Rays were generated after normalizing and illuminated through the global illumination helper function. This works by essentially estimating the integral over a certain domain, which in this case is the immediate surroundings of the pixel, and provides accurate illumination.</p>
+	<p>For ray generation, I applied basic Monte Carlo integration over ns_aa randomly sampled rays passing through the neighborhood of the pixel. Rays were generated after normalizing and illuminated through the global illumination helper function. This works by essentially estimating the integral over a certain domain, which in this case is the immediate surroundings of the pixel, and provides accurate illumination.
+	Below are some normal shading images.</p>
 	
 <div style="text-align: center;">
   <table style="width: 100%; margin-left: auto; margin-right: auto;">
     <tr>
       <td>
         <img src="task11.png" width="400px"/>
-        <figcaption></figcaption>
+        <figcaption>Spheres</figcaption>
       </td>
       <td>
         <img src="task12.png" width="400px"/>
-        <figcaption></figcaption>
+        <figcaption>Bunny</figcaption>
       </td>
       <td>
         <img src="task13.png" width="400px"/>
-        <figcaption></figcaption>
+        <figcaption>Gems</figcaption>
       </td>
     </tr>
     <tr>
       <td>
         <img src="task14.png" width="400px"/>
-        <figcaption></figcaption>
+        <figcaption>Cow</figcaption>
       </td>
       <td>
         <img src="task15.png" width="400px"/>
