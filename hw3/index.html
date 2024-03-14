@@ -57,6 +57,9 @@
         <img src="task12.png" align="middle" width="600px"/>
         <figcaption>Bunny</figcaption>
       </td>
+    </tr>
+    <br>
+    <tr>
       <td>
         <img src="task13.png" align="middle" width="600px"/>
         <figcaption>Gems</figcaption>
@@ -78,7 +81,6 @@
 <h3 align="middle">BVH Consutrction</h3>
   <p>
 	  For constructing the BVH tree, I went with a recursive approach, first checking the standard base case of whether or not we are at a leaf node. For the heuristic, along each axis, I computed the value of the left box’s surface area multiplied by the number of primitives on the left and added that with the value of the right box’s surface area multiplied by the number of primitives on the right side. Whichever was minimal was the axis I chose. I split into left and right boxes based on the average centroid position. I then recursed down the left and right subtrees based on the split from the heuristic. An interesting issue I ran into was pointer problems when performing the recursive call. The pointers to the vectors storing the primitives would get lost in the stack, causing my code to error. I asked ChatGPT how to fix this, and it recommended some C++ specific in-line function that addressed the problem without altering any dependencies. This was the partition function.
-	  
   </p>
 
   <div align="middle">
