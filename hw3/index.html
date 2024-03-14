@@ -117,60 +117,54 @@
 
 
 <h2 align="middle">Section III: Direct Illumination</h2>
-	<p>I implemented the Loop subdivison algorithm by first finding the positions of the new and old vertices, iterating around every vertex and each halfedge about each of those vertices. I then applied the formula for the updated position for the old vertex according to the spec. For the edges, I followed a similar approach by iterating over every edge of the mesh and finding the appropriate values to update. I then did the standard flipEdge and splitEdge over the proper edges. In this case, split every edge and flip an edge connecting an old and new vertex. An interesting debugging trick I used was to implement each step of the algorithm individually, and see the effect of it on the mesh. For instance, I first applied the splitEdge, then flipEdge, and then combined them to not only learn about the effects of each on the entire mesh, but also to make sure the implementation was correct. Sharp edges tend to smooth out, and cubes become much more spherical. Pre-splitting edges would probably lower the effect since they aren’t explicitly accounted for on each run. It doesn’t consider sharpness unless specifically done.</p>
-<p>Below are images of Loop subdivision steps performed on both the cube and the torus.</p>
-
-<div align="middle">
-  <table style="width=100%">
+	<p>The two main components of this section dealt with direct lighting through both uniform hemisphere sampling and light importance sampling. Uniform hemisphere sampling is a method by which we sample points evenly over a hemisphere surrounding a point on the surface. For each incoming radiance vector, we generate sample vectors that point in random directions over the hemisphere centered at the point, and the samples are chosen to be uniformly distributed. This helps with diffuse reflection since we can pseudo-simulate light scattering in many different directions upon hitting a surface. Importance sampling, on the other hand, can help reduce the noise created by uniform hemisphere sampling. More samples are generated here if those samples might contribute more to the light at a certain point, and less if not. So, we sample more frequently in directions towards light sources or along reflection vectors. The distribution of the samples, rather than using a uniform distribution, is the BSDF of the material. This allows for higher quality images with fewer generated samples. 
+</p>
+	
+<div align="center">
+  <table style="width:100%">
     <tr>
-      <td>
-        <img src="task6cube1.png" align="middle" width="400px"/>
-        <figcaption align="middle"></figcaption>
+      <td align="center">
+        <img src="task3hemisphere.png" width="400px"/>
+        <figcaption>Uniform hemisphere sampling</figcaption>
       </td>
-      <td>
-        <img src="task6cube2.png" align="middle" width="400px"/>
-        <figcaption align="middle">.</figcaption>
-      </td>
-    </tr>
-    <br>
-    <tr>
-      <td>
-        <img src="task6cube3.png" align="middle" width="400px"/>
-        <figcaption align="middle"></figcaption>
-      </td>
-      <td>
-        <img src="task6cube4.png" align="middle" width="400px"/>
-        <figcaption align="middle"></figcaption>
+      <td align="center">
+        <img src="task3importance.png" width="400px"/>
+        <figcaption>Light importance sampling</figcaption>
       </td>
     </tr>
   </table>
 </div>
 
-
+	<p>In these images, we see how much less noise is created in the importance light sampling image and how much more crisp and detailed the image is. This makes sense considering how importance light sampling will effectively sample more in spots where noise could potentially be more prevalent and uniform samples the same rate everywhere.</p>
+<p>Below are images of sampling based on the number of light rays we use.</p>
 <div align="middle">
   <table style="width=100%">
     <tr>
       <td>
-        <img src="task6torus1.png" align="middle" width="400px"/>
-        <figcaption align="middle"></figcaption>
+        <img src="task3l1.png" align="middle" width="400px"/>
+        <figcaption align="middle">1 light ray</figcaption>
       </td>
       <td>
-        <img src="task6torus2.png" align="middle" width="400px"/>
-        <figcaption align="middle">.</figcaption>
+        <img src="task3l4.png" align="middle" width="400px"/>
+        <figcaption align="middle">4 light rays</figcaption>
       </td>
     </tr>
     <br>
     <tr>
       <td>
-        <img src="task6torus3.png" align="middle" width="400px"/>
-        <figcaption align="middle"></figcaption>
+        <img src="task3l16.png" align="middle" width="400px"/>
+        <figcaption align="middle">16 light rays</figcaption>
       </td>
       <td>
-        <img src="task6torus4.png" align="middle" width="400px"/>
-        <figcaption align="middle"></figcaption>
+        <img src="task3l64.png" align="middle" width="400px"/>
+        <figcaption align="middle">64 light rays</figcaption>
       </td>
     </tr>
   </table>
 </div>
+	<p>In each of the images where we subsequently increase the number of light rays we render with, we also see how much more detailed the image becomes and how much less noise is being created while still maintaining the overall lighting effects even in the noisest, 1 light ray image. By the time we use the -l 64 flag, the picture is super clear with virtually no visible noise.</p>
+
+
+
 </body>
 </html>
