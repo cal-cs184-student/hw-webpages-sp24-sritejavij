@@ -262,7 +262,37 @@
   </table>
 </div>
 
+
+<h2 align="middle">Section V: Adaptive Sampling</h2>
+
+	<p>Adaptive sampling is a method by which we can vary the number of sample depending on where in the scene we are. Essentially, we are trying to figure out whether or not a pixel has converged based on the variance of the sample. We have a maximum tolerance level we multiply by the average of the samples’ mean, and if our condition is below this, we can safely say the pixel has converged. This leads to reduced noise, efficient calculations, and more. My code implements this by first collecting a predefined number of samples (ns_aa). Within this loop, I iterate through the batch size and collect samples. From each sample, I find the radiance generated from the rays and check the condition about the max tolerance. After the loop exits, I compute the radiance of the pixel based on the accumulated radiance from prior based on the tolerance heuristic.</p>
+
 	
+<div align="middle">
+  <table style="width=100%">
+    <tr>
+      <td>
+        <img src="task3l1.png" align="middle" width="400px"/>
+        <figcaption align="middle">Rendered image of a bunny</figcaption>
+      </td>
+      <td>
+        <img src="task3l4.png" align="middle" width="400px"/>
+        <figcaption align="middle">Sample heat map of the bunny</figcaption>
+      </td>
+    </tr>
+    <br>
+    <tr>
+      <td>
+        <img src="task3l16.png" align="middle" width="400px"/>
+        <figcaption align="middle">Rendered image of a dragon</figcaption>
+      </td>
+      <td>
+        <img src="task3l64.png" align="middle" width="400px"/>
+        <figcaption align="middle">Sample heat map of the dragon</figcaption>
+      </td>
+    </tr>
+  </table>
+</div>
 	
 
 </body>
