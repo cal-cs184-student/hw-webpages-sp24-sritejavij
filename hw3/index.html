@@ -39,7 +39,12 @@
 
 <h3 align="middle">Ray Generation</h3>
 	<p>For ray generation, I applied basic Monte Carlo integration over ns_aa randomly sampled rays passing through the neighborhood of the pixel. Rays were generated after normalizing and illuminated through the global illumination helper function. This works by essentially estimating the integral over a certain domain, which in this case is the immediate surroundings of the pixel, and provides accurate illumination.
-	Below are some normal shading images.</p>
+	</p>
+<h3 align="middle">Intersection</h3>
+	<p>
+		Ray-triangle intersection was performed by implementing the Möller-Trumbore algorithm. I first found the 2 edge vectors corresponding to a particular vertex, then computed the determinant with the edge and the normal to the edge and ray. This is useful in checking whether or not the ray is parallel to the triangle, in which case they will never intersect. Then, I computed barycentric coordinates, which, if outside of certain ranges depending on the vertex, show there are no intersections. The intersection point is found through the dot product of an edge and the corresponding barycentric coordinate. Finally, we double check the point is valid according to the timestep based on the bounds we have.
+		Below are some images of files with normal shading.
+	</p>
 	
 <div style="text-align: center;">
   <table style="width: 100%; margin-left: auto; margin-right: auto;">
@@ -65,6 +70,8 @@
     </tr>
   </table>
 </div>
+
+
 
 <h2 align="middle">Section II: Triangle Meshes and Half-Edge Data Structure</h2>
 
