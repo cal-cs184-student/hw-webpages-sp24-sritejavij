@@ -116,7 +116,7 @@
 
 <h2 align="middle">Section III: Direct Illumination</h2>
 	<p>The two main components of this section dealt with direct lighting through both uniform hemisphere sampling and light importance sampling. Uniform hemisphere sampling is a method by which we sample points evenly over a hemisphere surrounding a point on the surface. For each incoming radiance vector, we generate sample vectors that point in random directions over the hemisphere centered at the point, and the samples are chosen to be uniformly distributed. This helps with diffuse reflection since we can pseudo-simulate light scattering in many different directions upon hitting a surface. Importance sampling, on the other hand, can help reduce the noise created by uniform hemisphere sampling. More samples are generated here if those samples might contribute more to the light at a certain point, and less if not. So, we sample more frequently in directions towards light sources or along reflection vectors. The distribution of the samples, rather than using a uniform distribution, is the BSDF of the material. This allows for higher-quality images with fewer generated samples. 
-		For the actual implementation of the indirect lighting, I just subtracted the direct lighting from the overall result (one bounce radiance), and this left the scene with just indirect lighting results).
+		For the actual implementation of the indirect lighting, I just subtracted the direct lighting from the overall result (one bounce radiance), and this left the scene with just indirect lighting results.
 </p>
 	
 <div align="center">
@@ -294,7 +294,8 @@
     </tr>
   </table>
 </div>
-	
+<h2 align="middle">Section VI: Extra Credit</h2>	
+	<p>For extra credit, I also implemented the surface area heuristic when constructing the BVH tree. The exact heuristic weighted the surface area by the quantity of primitives on either side, and this proved to run quite fast.</p>
 
 </body>
 </html>
